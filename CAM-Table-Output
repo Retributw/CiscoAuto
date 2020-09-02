@@ -1,0 +1,76 @@
+import paramiko
+import time
+
+username = "admin"
+password = "XXXXX"
+
+ssh_client = paramiko.SSHClient()
+ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+# Connect to each IP in your file
+with open("{{ Your_File_Location",'r') as ip_file:
+    for ip_address in ip_file:
+          ssh_client.connect(hostname=ip_address,username=username,password=password)
+
+          print ("Successful connection", ip_address)
+          remote_connection = ssh_client.invoke_shell()
+          remote_connection.send("enable\n")
+          remote_connection.send("<enablepass>\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/2\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/3\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/4\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/5\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/6\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/7\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/8\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/9\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/10\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/11\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/12\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/13\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/14\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/15\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/16\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/17\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/18\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/19\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/20\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/21\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/22\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/23\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/24\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/25\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/26\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/27\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/28\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/29\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/30\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/31\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/32\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/33\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/34\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/35\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/36\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/37\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/38\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/39\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/40\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/41\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/42\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/43\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/44\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/45\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/46\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/47\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/48\n")
+          remote_connection.send("show mac address-table interface gigabitEthernet 1/0/49\n")
+          remote_connection.send("end\n")
+          time.sleep(1)
+          output = remote_connection.recv(65535)          
+          print(output)
+          Write to file
+          Make sure file already exists, you will append to it 
+          with open("{{Your_File_Location}},'a' as write_output:
+               write_output.write(output)
+               write_output.write("\n\n")
+          ssh_client.close
