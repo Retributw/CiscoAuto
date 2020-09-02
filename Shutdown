@@ -1,8 +1,4 @@
-#import cli
-#print cli.execute('enable')
-#print cli.execute('show run')
-
-
+import os
 import paramiko
 import time
 
@@ -13,23 +9,30 @@ ssh_client = paramiko.SSHClient()
 ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
 # Connect to each IP in your file
-with open("{{ Your_File_Location",'r') as ip_file:
+with open(r"ENTER_PATH_HERE") as ip_file:
     for ip_address in ip_file:
           ssh_client.connect(hostname=ip_address,username=username,password=password)
+
           print ("Successful connection", ip_address)
           remote_connection = ssh_client.invoke_shell()
-          remote_connection.send("enable\n")
-          remote_connection.send("<enable-pass>\n")
-          remote_connection.send("configure terminal\n")
-          remote_connection.send("interface range gig 1/0/2-48")
-          remote_connection.send("shutdown\n")
-          remote_connection.send("end\n")
           time.sleep(1)
-          #output = remote_connection.recv(65535)          
-          #print(output)
-          # Write to file
-          # Make sure file already exists, you will append to it 
-          #with open("{{Your_File_Location}},'a' as write_output:
-               #write_output.write(output)
-               #write_output.write("\n\n")
+          remote_connection.send("enable\n")
+          time.sleep(1)
+          remote_connection.send("ENABLEPASS\n")
+          time.sleep(1)
+          remote_connection.send("conf t\n")
+          time.sleep(1)
+          remote_connection.send("interface range g1/0/2-47\n")
+          time.sleep(1)
+          remote_connection.send(shutdown\n")
+          time.sleep(1)
+          remote_connection.send("exit\n")
+          time.sleep(1)
+          remote_connection.send("exit\n")
+          time.sleep(1)
+          remote_connection.send("wr\n")
+          time.sleep(5)
+          output = remote_connection.recv(65535)          
+          print(output)
+          print ("Config Edited Successfully")
           ssh_client.close
