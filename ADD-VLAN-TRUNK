@@ -1,3 +1,4 @@
+import os
 import paramiko
 import time
 
@@ -10,24 +11,27 @@ ssh_client = paramiko.SSHClient()
 ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
 # Connect to each IP in your file
-with open("{{ Your_File_Location",'r') as ip_file:
+with open(r"FILE_PATH-HERE") as ip_file: # <- check that
     for ip_address in ip_file:
           ssh_client.connect(hostname=ip_address,username=username,password=password)
 
           print ("Successful connection", ip_address)
           remote_connection = ssh_client.invoke_shell()
+          time.sleep(1)
           remote_connection.send("enable\n")
-          remote_connection.send("<enablepass>\n")
+          time.sleep(1)
+          remote_connection.send("ENABLEPASS\n")
+          time.sleep(1)
           remote_connection.send("conf t\n")
+          time.sleep(1)
           remote_connection.send("interface g1/0/49\n")
-          remote_connection.send("Switchport turnk allowed vlan add "VLAN"\n")
+          time.sleep(1)
+          remote_connection.send("Switchport trunk allowed vlan add "PLACE VLAN ID HERE"\n")
+          time.sleep(1)
           remote_connection.send("end\n")
           time.sleep(1)
           output = remote_connection.recv(65535)          
-          #print(output)
-          # Write to file
-          # Make sure file already exists, you will append to it 
-          #with open("{{Your_File_Location}},'a' as write_output:
-               #write_output.write(output)
-               #write_output.write("\n\n")
+          print(output)
+          print ("Config Edited Successfully")
           ssh_client.close
+
