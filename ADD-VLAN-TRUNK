@@ -4,8 +4,7 @@ import time
 
 username = "admin"
 password = "XXXXX"
-ID = "xxx"
-VLAN = "ID"
+
 
 ssh_client = paramiko.SSHClient()
 ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
